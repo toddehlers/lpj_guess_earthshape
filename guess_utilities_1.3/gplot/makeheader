@@ -1,0 +1,10 @@
+########################################################################
+# MAKEHEADER
+# Bash script to write a header file containing paths required by gplot 
+# 
+# usage: sh makeheader <path>
+
+MF=$1'/gplot_path.h'
+
+echo 'const char FILE_MANPAGE[]="'$1'/doc/gplot.man.gz";' >> $MF
+

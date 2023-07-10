@@ -1,0 +1,13 @@
+########################################################################
+# MAKEHEADER
+# Bash script to write a header file containing the paths to 
+# mask files used by GMAP
+# 
+# usage: sh makeheader <path>
+
+MF=$1'/gmap_path.h'
+
+echo 'const char FILE_OCEANMASK[]="'$1'/mask/oceanmask.txt";' >> $MF
+echo 'const char FILE_SWEDENMASK[]="'$1'/mask/swedenmask.txt";' >> $MF
+echo 'const char FILE_MANPAGE[]="'$1'/doc/gmap.man.gz";' >> $MF
+

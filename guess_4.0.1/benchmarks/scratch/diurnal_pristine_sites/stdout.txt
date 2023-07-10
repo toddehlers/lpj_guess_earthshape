@@ -1,0 +1,3 @@
+In /esd/esd01/data/willi/lpj_git/lpj-guess/data/ins/europe.ins, line 26, "file_cmass":
+  Error: Undefined identifier
+Bad instruction file!

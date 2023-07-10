@@ -1,0 +1,159 @@
+.\" t
+.TH GMAP 1 "APRIL 2012" Linux "User Manuals"
+.SH NAME
+\fBgmap\fP \- Visualisation utility for latitude-longitude referenced data on a geographic grid
+.SH SYNOPSIS
+.B gmap
+.I input-file
+.B [
+.I options
+.B ]
+.SH DESCRIPTION
+Plots a colour-coded map including a legend, title and optional coastline and political boundaries, grid lines and frame to a PostScript or other graphical output file, and optionally to the screen. The input data must include longitude, latitude and a scalar or categorical variable to display, normally spanning adjacent cells of a regular geographic grid. The data are read from a plain-text file in which each row represents one grid cell and space- or tab-delimited columns include longitude, latitude and the variable to display. An initial header row containing column labels may be included.
+.TS
+LLLLLL .
+Sample input file:	Lon	Lat	Tree	Grass	Total
+	13.5	55.5	0.510	0.023	0.533
+	13.5	56.0	0.487	0.029	0.516
+	14.0	56.0	0.495	0.025	0.520
+.TE
+.SH OPTIONS
+.IP "\fB-o \fIoutput-file\fP"
+Pathname for graphical output file. The file format is determined from the extension of the specified pathname. Recognised extensions are .eps, .jpg, .pdf, .png, .ps and .tif. The default is .ps (PostScript). Formats other than PostScript require GhostScript (gs) to be installed and available at the command line.
+.IP "\fB-xv\fP"
+Preview graphical output on screen. Ghostscript (gs) must be available at the command line, an X server must be running on the local machine and X11 tunnelling or communication via port 6000 must be enabled.
+.IP "\fB-i \fIitem-name\fP | \fIcolumn-number\fP"
+Item name or 1-based column number for output data.
+.IP "\fB-lon \fIitem-name\fP | \fIcolumn-number\fP"
+Item name or 1-based column number for longitude data.
+.IP "\fB-lat \fIitem-name\fP | \fIcolumn-number\fP"
+Item name or 1-based column number for latitude data.
+.IP "\fB-seps\fP"
+Columns separated by spaces or single tabs.
+.IP "\fB-sept\fP"
+Columns separated by single tabs.
+.IP "\fB-pixsize \fIx\fP \fIy\fP"
+Raster pixel dimensions in degrees of longitude (\fIx\fP) and latitude (\fIy\fP).
+.IP "\fB-pixoffset \fIdx\fP \fIdy\fP"
+Offset in degrees of centre of pixel from coordinate specified in data.
+.IP "\fB-c \fIcolour-scale\fP [ \fIcolour-scale\fP ]"
+Colour scheme for scalar data and legends. If a second colour scale is specified, the first is used for negative values, the second for positive values. Available schemes: REDVIOLET, VIOLETRED, REDBLUE, BLUERED, REDCYAN, CYANRED, GREYRED, GREYCYAN, RED, BLUE, GREEN, SHADE, COOL, WARM, WET, DRY, DEPTH, ALTITUDE, NEEGREEN, NEERED, SOIL, VEGETATION, FIRE, DITHER.
+.IP "\fB-s \fImin\fP \fIrange\fP \fInclass\fP"
+Data scale for scalar data legends: \fImin\fP = lower range for first class; \fIrange\fP = interval between classes; \fInclass\fP = number of classes. Overrides rounding parameter if given by \fB-r\fP.
+.IP "\fB-s \fImin\fP \fImax\fP"
+Data scale for scalar data legends: \fImin\fP = approximate lower range for lowest class; \fImax\fP = approximate upper range for highest class. Exact ranges depend on rounding parameter which may be set by \fB-r\fP.
+.IP "\fB-s\fP"
+Force plotting as scalar data.
+.IP "\fB-cat\fP"
+Force plotting as categorical data (maximum 100 classes).
+.IP "\fB-slog \fB[\fP \fImin\fP \fImax\fP \fB[\fP \fInclass\fP \fB] ]\fP"
+Logarithmic data scale for scalar data legend: \fImin\fP = approximate lower range for lowest class; \fImax\fP = approximate upper range for highest class; \fInclass\fP = approximate number of classes.
+.IP "\fB-r \fIround\fP"
+Rounding parameter (1-9) for scalar data legend: values outside range 1-9 cause default rounding.
+.IP \fB-nozero
+Suppress "exactly zero" class in data and legend.
+.IP "\fB-legend \fIlegend-file\fP"
+Specifies file containing colours and class values/boundaries for legend. Colours are specified as space-delimited RGB triplets on a single row. For categorical legends, class value is specied on a single row preceding the corresponding colour triplet. The class value may be followed by a text label, giving a name to the class. For scalar legends, class boundaries and colours are specified on alternate rows.
+.TS
+LLL .
+e.g.	Categorical legend:	Scalar legend:
+	1 TrBE	2.0
+	1.0 0.0 0.0	1.0 0.0 0.0
+	2 TrIBE	1.5
+	1.0 0.0 0.5	1.0 1.0 0.0
+	3 TrBR	1.0
+	0.3 0.7 0.0	0.0 1.0 1.0
+	4 C4G	0.5
+	0.0 0.0 1.0	0.0 0.0 1.0
+		0.0
+.TE
+.IP "\fB-hlslegend \fIlegend-file\fP"
+Specifies file containing colours and class values/boundaries for legend. Colours are specified as HLS triplets on a single row (H=hue in range 0-360, L=lightess in range 0-100; S=saturation in range 0-100). Format as for RGB legends (see \fB-legend\fP)
+.IP "\fB-horiz\fP"
+Forces horizontal legend underneath map.
+.IP "\fB-vert\fP"
+Forces vertical legend beside map.
+.IP "\fB-w \fIwindow\fP"
+Geographical window to display, one of: AFRICA, ARCTIC, ASIA, AUSTRALIA, BALTIC, BOREAL, EU15, EURASIA, EUROPE, GLOBAL, GLOBALLAND, ICELAND, JAPAN, NAMERICA, NORDIC, SAMERICA, SCANDINAVIA, SWEDEN, US48, USA.
+.IP "\fB-west \fIlongitude\fP \fB-east \fIlongitude\fP \fB-south \fIlatitude\fP \fB-north \fIlatitude\fP"
+Boundaries for geographic window to display (override \fB-w\fP). Negative \fIlongitude\fP west of Greenwich, negative \fIlatitude\fP south of equator.
+.IP "\fB-t \fItitle\fP"
+Title text for display above map. Multi-word titles should be given in single quotes (e.g. 'Map of NPP'). The following format specifiers may be embedded:
+.TS
+LL .
+!b	change to bold font
+!i	change to italic font
+!^	change to superscript font
+!_	change to subscript font
+!p	change to plain font
+!s(x)	change text size to x points
+!c(x)	insert character with code x from symbols character set
+!!	insert exclamation mark
+.TE
+.IP "\fB-p \fIprojection\fP"
+Geographic projection, one of:
+.TS
+LL .
+FAHEY	- pseudocylindrical, limited distortion, default
+WINKEL	- Winkel Tripel, azimuthal, limited distortion
+MERCATOR	- cylindrical, classic cartographic projection
+LAMBERT	- cylindrical equal area
+CYLEQD	- cylindrical equidistant
+MOLLWEIDE	- pseudocylindrical equal area
+GOODE	- Goode Homolosine, pseudocylindrical
+ROBINSON	- pseudocylindrical, common cartographic projection
+NPOLAR	- north polar stereographic
+SPOLAR	- south polar stereographic
+.TE
+.IP "\fB-rot \fIlongitude\fP"
+Principal meridian for polar projections.
+.IP "\fB-bound\fP NONE \fB|\fP COAST \fB|\fP POLIT \fB|\fP SWEDEN"
+Vector boundaries to be plotted above raster (none, coastlines, coastlines+political boundaries, Swedish national boundary).
+.IP "\fB-nogrid\fP"
+Suppresses plotting of grid lines on map.
+.IP "\fB-noframe\fP"
+Suppresses plotting of frame around map.
+.IP "\fB-portrait\fP"
+Forces 'portrait' page orientation.
+.IP "\fB-landscape\fP"
+Forces 'landscape' page orientation.
+.IP "\fB-textsize_title \fIpoints\fP"
+Text size for title in points.
+.IP "\fB-textsize_legend \fIpoints\fP"
+Text size for legend in points.
+.IP "\fB-linewidth \fIpoints\fP"
+Width of grid lines, vectors and map frame in points.
+.IP "\fB-mask [ \fPOCEAN\fB | \fPSWEDEN\fB ]\fP"
+Mask out data over oceans (default) or around the national boundary of Sweden.
+.IP "\fB-smooth [ \fIdensity\fP\fB ]\fP"
+Smooth raster by a bicubic interpolation at the given density (default 16) between data points in both the west-east and south-north dimension. The data are first interpolated to a regular latitude-longitude grid by distance-weighted nearest-neighbour interpolation (no shift unless the data are not regular to start with).
+.IP "\fB-help\fP"
+Displays this help text.
+.SH EXAMPLES
+.IP "\fIgmap data.txt -i 3\fP"
+Plots data from Column 3 in data.txt using the default colour scale, with
+coastlines shown. Longitude should be given in Column 1 and latitude in
+Column 2, no header row present. The number of records should be sufficient
+to allow gmap to estimate pixel sizes from distances between data points.
+The coordinates are assumed to refer to the southwest corner of the grid cell. The output will consist of a PostScript file called figure.ps.
+.IP "\fIgmap data.txt -i Total\fP"
+Plots data from the column labelled Total in the initial header row of data.txt. Longitude item should be
+labelled "Lon" or similar; latitude should be labelled "Lat" or similar.
+.IP "\fIgmap data.txt -i Total -pixsize 0.5 0.5 -pixoffset 0 0\fP"
+As above, pixels are 0.5 x 0.5 degrees, the given coordinate refers to
+the centre of the grid cell.
+.IP "\fIgmap data.txt -lon X -lat Y -i Total -o map.jpg\fP"
+Longitude given in column labelled "X", latitude in column labelled "Y". If Ghostscript (gs) is available, output is written to a JPEG file, map.jpg.
+.IP "\fIgmap data.txt -c cool warm -proj npolar -s -100 10 20 -t \[dq]Arctic Data\[dq] -xv\fP"
+Plot data using a north polar projection with cool colours (green, blue, violet) for negative
+values and warm colours (yellow, red, magenta) for positive values. Classes range from -100 to
+100 with an interval of 10 between classes. Show the title
+"Arctic Data" above the map. A preview is displayed on the screen if possible (see \fB-xv\fP under OPTIONS).
+.IP "\fIgmap data.txt -i Total -pixsize 0.5 0.5 -smooth -mask\fB"
+Plot data from the column labelled Total with a smooth transition between data points. The data are first interpolated to a 0.5 x 0.5 degree grid if they do not already follow such a grid. Ocean areas are masked out (appear white).
+.SH ACKNOWLEDGEMENTS
+GMAP employs a customised version of the projections library libproj4 by
+Gerald I. Evenden (original available at www.remotesensing.org/proj).
+.SH "SEE ALSO"
+.BR gplot ,
+.BR gs

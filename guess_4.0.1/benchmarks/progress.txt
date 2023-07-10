@@ -1,0 +1,10 @@
+The following benchmarks are done:
+global
+europe
+diurnal_pristine_sites
+euroflux
+crop_mixed_sites
+pristine_sites
+euroflux_globalpfts
+emdi_global
+crop_global

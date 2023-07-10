@@ -1,0 +1,117 @@
+.\" t
+.TH GPLOT 1 "MARCH 2008" Linux "User Manuals"
+.SH NAME
+\fBgplot\fP \- Graphical visualisation utility for two-dimensional data
+.SH SYNOPSIS
+.B gplot
+.I input-file
+.B [
+.I options
+.B ]
+.SH DESCRIPTION
+.SH OPTIONS
+.IP "\fB-o \fIoutput-file\fP"
+Pathname for graphical output file. The file format is determined from the extension of the specified pathname. Recognised extensions are .eps, .jpg, .pdf, .png, .ps and .tif. The default is .ps (PostScript). Formats other than PostScript require GhostScript (gs) to be installed and available at the command line.
+.IP "\fB-xv\fP"
+Preview graphical output on screen. Ghostscript (gs) must be available at the command line, an X server must be running on the local machine and X11 tunnelling or communication via port 6000 must be enabled.
+.IP "\fB-i \fIitem-name\fP | \fIcolumn-number\fP { \fIitem-name\fP | \fIcolumn-number\fP }"
+Item name or 1-based column number for output data. List X-axis data first, then data for primary Y axis.
+.IP "\fB-x \fIitem-name\fP | \fIcolumn-number\fP"
+Item name or 1-based column number for X-axis data.
+.IP "\fB-y \fIitem-name\fP | \fIcolumn-number\fP { \fIitem-name\fP | \fIcolumn-number\fP }"
+Item name(s) or 1-based column number(s) for primary Y axis.
+.IP "\fB-y2 \fIitem-name\fP | \fIcolumn-number\fP { \fIitem-name\fP | \fIcolumn-number\fP }"
+Item name(s) or 1-based column number(s) for secondary Y axis.
+.IP "\fB-seps\fP"
+Columns separated by spaces or single tabs.
+.IP "\fB-sept\fP"
+Columns separated by single tabs.
+.IP "\fB-t \fItitle\fP"
+Title text for display above graph. Multi-word titles should be given in single quotes (e.g. 'Graph of NPP'). The following format specifiers may be embedded:
+.TS
+LL .
+!b      change to bold font
+!i      change to italic font
+!^      change to superscript font
+!_      change to subscript font
+!p      change to plain font
+!s(x)   change text size to x points
+!c(x)   insert character with code x from symbols character set
+!!      insert exclamation mark
+.TE
+.IP "\fB-xt \fIaxis-title\fP"
+Title text for X axis. See \fB-t\fP.
+.IP "\fB-yt \fIaxis-title\fP"
+Title text for primary Y axis. See \fB-t\fP.
+.IP "\fB-y2t \fIaxis-title\fP"
+Title text for secondary Y axis. See \fB-t\fP.
+.IP "\fB-sx \fImin\fP \fImax\fP [\fIround\fP]"
+X-axis range with optional rounding parameter in range 1-9. The tic interval is set to \fIround\fPE\fIx\fP, where \fIx\fP is any integer power of 10. 
+.IP "\fB-sy \fImin\fP \fImax\fP [\fIround\fP]"
+Primary Y-axis range with optional rounding parameter in range 1-9. See \fB-sx\fP.
+.IP "\fB-sy \fImin\fP \fImax\fP [\fIround\fP]"
+Secondary Y-axis range with optional rounding parameter in range 1-9. See \fB-sx\fP.
+.IP "\fB-inverse\fP"
+Vertical X-axis, horizontal Y-axes.
+.IP "\fB-logx\fP"
+Log-transform X-axis.
+.IP "\fB-logy\fP"
+Log-transform primary Y-axis.
+.IP "\fB-logy2\fP"
+Log-transform secondary Y-axis.Y
+.IP "\fB-mtic\fP"
+Show minor axis tics.
+.IP "\fB-legend\fP \fIlegend-file\fP"
+Specifies file containing legend settings for Y-data items. The file should be a plain-text file with settings for one item (variable) on each row. A row should begin with the label or column number for a particular item as it appears in \fIinput-file\fP followed by one or more of the following settings, separated by spaces or tabs:
+.TS
+LL .
+red=\fIvalue\fP	- red channel (0-1) for RGB colour
+green=\fIvalue\fP	- green channel (0-1) for RGB colour
+blue=\fIvalue\fP	- blue channel (0-1) for RGB colour
+hue=\fIvalue\fP	- hue (0-360) for HLS colour
+light=\fIvalue\fP	- lightness (0-1) for HLS colour
+sat=\fIvalue\fP	- saturation (0-1) for HLS colour
+marker=\fIvalue\fP	- marker symbol (0-15) for scatter plots
+mscale=\fIvalue\fP	- scale (relative to default 1) for marker symbols
+line=\fIvalue\fP	- line style (0-18) for line plots
+lscale=\fIvalue\fP	- scale (relative to default 1) for lines
+pattern=\fIvalue\fP	- pattern style (0-18) for stacked area plots
+pscale=\fIvalue\fP	- scale (relative to default 1) for patterns
+.TE
+.TS
+LL .
+e.g.	Veg red=0 green=1 blue=0 line=2
+	Soil red=0.7 green=0.7 blue=0 line=2
+	NEE red=1 green=0 blue=0 line=1 lscale=1.5
+.TE
+
+\fIlegend-file\fP may contain a subset or superset of all Y-data items appearing in \fIinput-file\fP or in the plot. Items may appear in any order. Items requested by \fB-y\fP or \fB-y2\fP but not included in \fIlegend-file\fP are displayed using default settings.
+.IP "\fB-mono\fP"
+Monochrome plot.
+.IP "\fB-stack\fP"
+Stacked area plot (primary Y axis data only).
+.IP "\fB-trend\fP"
+Show trend lines (simple linear regression, primary Y-axis data only).
+.IP "\fB-eq\fP"
+Show line of equality between primary axes.
+.IP "\fB-size\fP \fIwidth\fP \fIheight\fP"
+Data area dimensions on page in mm.
+.IP "\fB-offset\fP"
+Offset axes from data area.
+.IP "\fB-frame\fP"
+Show frame around data area.
+.IP "\fB-portrait\fP"
+Forces 'portrait' page orientation.
+.IP "\fB-landscape\fP"
+Forces 'landscape' page orientation.
+.IP "\fB-textsize_legend \fIpoints\fP"
+Text size for label text in points.
+.IP "\fB-linewidth \fIpoints\fP"
+Width of axes, curves and map frame in points.
+.IP "\fB-help\fP"
+Displays this help text.
+.SH EXAMPLES
+.SH "SEE ALSO"
+.BR gmap ,
+.BR gs
+

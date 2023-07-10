@@ -1,0 +1,13 @@
+########################################################################
+# MAKEHEADER
+# Bash script to write a header file containing the path to the
+# BenGraph root directory
+# 
+# usage: sh makeheader <path>
+
+MF=$1'/bengraph_path.h'
+
+echo 'const char homedir[]="'$1'";' > $MF
+echo 'const char file_veccoast[]="'$1'/vector/veccoast.bin";' >> $MF
+echo 'const char file_vecbound[]="'$1'/vector/vecbound.bin";' >> $MF
+echo 'const char file_vecsweden[]="'$1'/vector/vecsweden.bin";' >> $MF

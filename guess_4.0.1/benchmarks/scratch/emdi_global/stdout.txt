@@ -1,0 +1,9 @@
+In /esd/esd01/data/willi/lpj_git/lpj-guess/data/ins/global.ins, line 20, "file_anpp":
+  Error: Undefined identifier
+Bad instruction file!
+In /esd/esd01/data/willi/lpj_git/lpj-guess/data/ins/global.ins, line 20, "file_anpp":
+  Error: Undefined identifier
+Bad instruction file!
+In /esd/esd01/data/willi/lpj_git/lpj-guess/data/ins/global.ins, line 20, "file_anpp":
+  Error: Undefined identifier
+Bad instruction file!

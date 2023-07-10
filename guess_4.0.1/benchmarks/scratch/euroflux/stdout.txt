@@ -1,0 +1,14 @@
+In /esd/esd01/data/willi/lpj_git/lpj-guess/data/ins/europe.ins, line 346, ")":
+  Error: Missing mandatory setting: aphen_max
+In /esd/esd01/data/willi/lpj_git/lpj-guess/data/ins/europe.ins, line 346, ")":
+  Error: Missing mandatory setting: nrelocfrac
+In /esd/esd01/data/willi/lpj_git/lpj-guess/data/ins/europe.ins, line 346, ")":
+  Error: PLIB forcibly terminated by calling module
+Bad instruction file!
+In /esd/esd01/data/willi/lpj_git/lpj-guess/data/ins/europe.ins, line 346, ")":
+  Error: Missing mandatory setting: aphen_max
+In /esd/esd01/data/willi/lpj_git/lpj-guess/data/ins/europe.ins, line 346, ")":
+  Error: Missing mandatory setting: nrelocfrac
+In /esd/esd01/data/willi/lpj_git/lpj-guess/data/ins/europe.ins, line 346, ")":
+  Error: PLIB forcibly terminated by calling module
+Bad instruction file!

@@ -1,0 +1,51 @@
+==================================================================
+Installation instructions for graphical visualisation utility GMAP
+==================================================================
+
+Unzip the archive (gmap.tar.gz) to a directory of your choice.
+This creates a subdirectory there called gmap.
+NOTE: this will remain the permanent home of GMAP following
+installation.
+
+	gunzip gmap.tar.gz
+	tar -xvf gmap.tar
+
+Enter the gmap directory:
+
+	cd gmap
+
+and build the executable:
+
+	make
+
+If the build is successful, the executable 'gmap' should now be
+present in the gmap directory.
+
+If you wish you may clean up unneeded build files by typing:
+
+	make clean
+
+To install gmap so that it is found within your default path,
+log in as root (superuser) and type:
+
+	make install
+
+(If you do not have permission to log in as root on your system,
+you may instead add the path to the gmap directory to your
+default path as specified in the '.bashrc' file in your home
+directory. For example, if you have placed gmap in a directory
+called mysoftware under your home directory, you might add the
+following line to .bashrc:
+
+	export PATH=~/mysoftware/gmap:$PATH
+
+First time you will have to reinitialise the cell by typing:
+
+	source ~/.bashrc
+
+End of parenthesis).
+
+
+Ben Smith
+www.nateko.lu.se/personal/benjamin.smith/software
+2007-07-17.
